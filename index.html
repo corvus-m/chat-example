@@ -15,22 +15,50 @@
       #messages > li:nth-child(odd) { background: #efefef; }
     </style>
   </head>
+
+
+  
   <body>
     <h1>Chat</h1>
+    
     <button onclick="closeThis()">Cerrar</button>
     <ul id="messages"></ul>
+<!--     <form id = "username" onsubmit="return newUser(this)">  // caso para llamar a la funcion newUser directamente-->  
+    <!-- puede faltar action "" -->
+     <form id = "username">
+      <input type="text" id="theUser" placeholder="User Name:" />
+
+    </form>
+    
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
 
+    
     <script>
       var socket = io();
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
+      var user = document.getElementById('theUser');
+
       
+      username.addEventListener('submit', function(e){
+        if(user.value){
+          socket.emit('log', user.value);
+        }
+      })
+
+      socket.on('log', function(usuario){
+         var item = document.createElement('li');
+        item.textContent = "Welcome "+ usuario;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      
+
       
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -42,10 +70,13 @@
       
     function closeThis()
     {
-    socket.emit('close', "ACABOSE");
+      socket.emit('close', "ACABOSE");
       socket.close();
     }
 
+      
+
+    
       socket.on('chat message', function(msg) {
         var item = document.createElement('li');
         item.textContent = msg;
@@ -53,6 +84,15 @@
         window.scrollTo(0, document.body.scrollHeight);
       });
 
+    socket.on("connection", function (socket) {
+      console.log("Usuario conectado");
+      socket.emit("messages", messages);
+    });
+
+
+
+
+      
 
       //socket.onclose
       // socket.on('close', function(end) {
