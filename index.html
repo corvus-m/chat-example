@@ -17,6 +17,7 @@
   </head>
   <body>
     <h1>Chat</h1>
+    <button onclick="closeThis()">Cerrar</button>
     <ul id="messages"></ul>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
@@ -29,6 +30,7 @@
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
+      
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -37,6 +39,12 @@
           input.value = '';
         }
       });
+      
+    // function closeThis()
+    // {
+    // socket.emit('close', "ACABOSE");
+    //   socket.close();
+    // }
 
       socket.on('chat message', function(msg) {
         var item = document.createElement('li');
@@ -44,6 +52,18 @@
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
+
+
+      //socket.onclose
+      // socket.on('close', function(end) {
+      //   var item = document.createElement('end');
+      //   item.textContent = end;
+      //   messages.appendChild(item);
+      //   window.scrollTo(0, document.body.scrollHeight);
+      // });
+
+
+      
     </script>
   </body>
 </html>
