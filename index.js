@@ -8,9 +8,11 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-   console.log("New user");
+   console.log("conexion");
+  
   socket.on('log', usuario => {
-    io.emit('log', usuario)
+    console.log("Welcome "+ usuario);
+    io.emit('log', usuario);
   } );
   
   socket.on('chat message', msg => {

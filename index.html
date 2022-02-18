@@ -13,6 +13,8 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
+       #messages > usuario { padding: 0.5rem 1rem; }
+      #messages > usuario:nth-child(odd) { background: red; }
     </style>
   </head>
 
@@ -22,10 +24,11 @@
     <h1>Chat</h1>
     
     <button onclick="closeThis()">Cerrar</button>
+    <ulx id="usuarios"></ulx>
     <ul id="messages"></ul>
 <!--     <form id = "username" onsubmit="return newUser(this)">  // caso para llamar a la funcion newUser directamente-->  
     <!-- puede faltar action "" -->
-     <form id = "username">
+     <form id = "username" action = "">
       <input type="text" id="theUser" placeholder="User Name:" />
 
     </form>
@@ -49,12 +52,15 @@
         if(user.value){
           socket.emit('log', user.value);
         }
-      })
+      });
 
       socket.on('log', function(usuario){
-         var item = document.createElement('li');
-        item.textContent = "Welcome "+ usuario;
-        messages.appendChild(item);
+        console.log("mierda");
+         var User = document.createElement('User');
+
+        User.textContent = "Welcome "+ usuario;
+        //h1.appendChild(item);
+        usuarios.appendChild(User);
         window.scrollTo(0, document.body.scrollHeight);
       });
       
@@ -68,12 +74,7 @@
         }
       });
       
-    function closeThis()
-    {
-      socket.emit('close', "ACABOSE");
-      socket.close();
-    }
-
+  
       
 
     
@@ -84,10 +85,18 @@
         window.scrollTo(0, document.body.scrollHeight);
       });
 
-    socket.on("connection", function (socket) {
-      console.log("Usuario conectado");
-      socket.emit("messages", messages);
-    });
+
+
+
+    function closeThis(){
+      socket.emit('close', "ACABOSE");
+      socket.close();
+    }
+
+    // socket.on("connection", function (socket) {
+    //   console.log("Usuario conectado");
+    //   socket.emit("messages", messages);
+    // });
 
 
 
