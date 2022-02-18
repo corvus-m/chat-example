@@ -13,8 +13,8 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
-       #messages > usuario { padding: 0.5rem 1rem; }
-      #messages > usuario:nth-child(odd) { background: red; }
+       #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
+      #messages > usuario:nth-child(odd) { background: #efefef; font-weight: bold; }
     </style>
   </head>
 
@@ -24,7 +24,7 @@
     <h1>Chat</h1>
     
     <button onclick="closeThis()">Cerrar</button>
-    <ulx id="usuarios"></ulx>
+    
     <ul id="messages"></ul>
 <!--     <form id = "username" onsubmit="return newUser(this)">  // caso para llamar a la funcion newUser directamente-->  
     <!-- puede faltar action "" -->
@@ -45,22 +45,23 @@
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
+      var username = document.getElementById('username');
       var user = document.getElementById('theUser');
 
       
       username.addEventListener('submit', function(e){
+        e.preventDefault();
         if(user.value){
           socket.emit('log', user.value);
         }
       });
 
       socket.on('log', function(usuario){
-        console.log("mierda");
-         var User = document.createElement('User');
+         var User = document.createElement('usuario');
 
         User.textContent = "Welcome "+ usuario;
         //h1.appendChild(item);
-        usuarios.appendChild(User);
+        messages.appendChild(User);
         window.scrollTo(0, document.body.scrollHeight);
       });
       
