@@ -13,6 +13,9 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
+      #messages > lu { padding: 0.5rem 1rem;  font-weight: bold; display: block; }
+      #messages > lu:nth-child(odd) { background: #efefef;  font-weight: bold;   }
+       #messages > lu > luli { background:inherit ; display:inline; font-weight: normal }
       #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
       #messages > usuario:nth-child(odd) { background: #efefef; font-weight: bold; }
     </style>
@@ -85,14 +88,27 @@
 
     
       socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
         
-        if(User.textContent != "")
-           item.textContent = User.textContent + ": " + msg;        
-        else
+        
+        if(User.textContent != ""){
+          var usu = document.createElement('lu');
+           usu.textContent = User.textContent + ": " ; 
+
+          var mUsu = document.createElement('luli');
+          mUsu.textContent = msg;
+          usu.appendChild(mUsu);
+          
+           messages.appendChild(usu);
+           window.scrollTo(0, document.body.scrollHeight);
+         }
+
+        else{
+          var item = document.createElement('li');
           item.textContent = msg;
         
         messages.appendChild(item);
+        }
+        
         window.scrollTo(0, document.body.scrollHeight);
       });
 
