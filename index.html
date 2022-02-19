@@ -13,7 +13,7 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
-       #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
+      #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
       #messages > usuario:nth-child(odd) { background: #efefef; font-weight: bold; }
     </style>
   </head>
@@ -21,7 +21,7 @@
 
   
   <body>
-    <h1>Chat</h1>
+    <h2>Chat</h2>
     
     <button onclick="closeThis()">Cerrar</button>
     
@@ -47,7 +47,8 @@
       var input = document.getElementById('input');
       var username = document.getElementById('username');
       var user = document.getElementById('theUser');
-
+      var User = document.createElement('usuario');
+      User.textContent = "";
       
       username.addEventListener('submit', function(e){
         e.preventDefault();
@@ -57,12 +58,14 @@
       });
 
       socket.on('log', function(usuario){
-         var User = document.createElement('usuario');
-
-        User.textContent = "Welcome "+ usuario;
-        //h1.appendChild(item);
-        messages.appendChild(User);
-        window.scrollTo(0, document.body.scrollHeight);
+       
+        if(usuario){
+          User.textContent = "Welcome "+ usuario;
+          //h1.appendChild(item);
+          messages.appendChild(User);
+          window.scrollTo(0, document.body.scrollHeight);
+          User.textContent = usuario;
+        }
       });
       
 
@@ -81,7 +84,12 @@
     
       socket.on('chat message', function(msg) {
         var item = document.createElement('li');
-        item.textContent = msg;
+        
+        if(User.textContent != "")
+           item.textContent = User.textContent + ": " + msg;        
+        else
+          item.textContent = msg;
+        
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
