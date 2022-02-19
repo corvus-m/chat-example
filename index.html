@@ -60,11 +60,13 @@
       socket.on('log', function(usuario){
        
         if(usuario){
-          User.textContent = "Welcome "+ usuario;
-          //h1.appendChild(item);
-          messages.appendChild(User);
-          window.scrollTo(0, document.body.scrollHeight);
+          var item = document.createElement('usuario');
+          item.textContent ="Welcome "+ usuario;
           User.textContent = usuario;
+          //h1.appendChild(item);
+          messages.appendChild(item);
+          window.scrollTo(0, document.body.scrollHeight);
+      
         }
       });
       
