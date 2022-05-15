@@ -38,9 +38,7 @@
 
     </form>
 
-  <form id = "linkOrImg" action = ""> Send images or links here: <br/>
-      <input type="text" id="linkImg" placeholder="Image link or regular link" /><button>Send</button>
-    </form>
+
     
     <ul id="messages"></ul>
 <!--     <form id = "username" onsubmit="return newUser(this)">  // caso para llamar a la funcion newUser directamente-->  
@@ -94,13 +92,7 @@ function validURL(str) {
       });
 
       
-     linkOrImg.addEventListener('sumbir', function (e) {
-        e.preventDefault();
-        if(input.value) {
-          socket.emit('chat message', input.value);
-          input.value = '';
-        }
-     });
+
 
 
       
@@ -155,7 +147,8 @@ function validURL(str) {
           usu.appendChild(imgUsu);
           usu.appendChild(sender);
           
-        if(validURL(msg)){ //links solo usuarios registrados
+        if(validURL(msg)){ //links e imagenes solo usuarios registrados
+          
           var linkMsg = document.createElement('a');
           var imgMsg = document.createElement('img');
           
@@ -163,6 +156,7 @@ function validURL(str) {
           linkMsg.href = msg;
 
           imgMsg.src = msg;
+          imgMsg.height = "200";
           
           
           sender.appendChild(linkMsg);
