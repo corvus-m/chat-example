@@ -155,13 +155,20 @@ function validURL(str) {
           usu.appendChild(imgUsu);
           usu.appendChild(sender);
           
-        if(validURL(msg)){
+        if(validURL(msg)){ //links solo usuarios registrados
           var linkMsg = document.createElement('a');
+          var imgMsg = document.createElement('img');
           
           linkMsg.textContent = msg;
           linkMsg.href = msg;
+
+          imgMsg.src = msg;
+          
+          
           sender.appendChild(linkMsg);
-           
+          sender.appendChild(imgMsg)
+        
+
           
            messages.appendChild(usu);
            window.scrollTo(0, document.body.scrollHeight);
