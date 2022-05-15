@@ -16,6 +16,9 @@
       #messages > lu { padding: 0.5rem 1rem;  font-weight: bold; display: block; }
       #messages > lu:nth-child(odd) { background: #efefef;  font-weight: bold;   }
        #messages > lu > luli { background:inherit ; display:inline; font-weight: normal }
+
+      #messages > lu > img { width: 16;
+                      height: auto}
       #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
       #messages > usuario:nth-child(odd) { background: #efefef; font-weight: bold; }
     </style>
@@ -25,7 +28,10 @@
   
   <body>
     <h2>Chat</h2>
-    
+
+  <!--    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"> </img> -->
+
+    <img src="https://replit.com/@MateoOrive/chat-example-4#fellowship.jpeg";> </img>
     <button onclick="closeThis()">Close conection</button>
     <button onclick="logOut()">Log out</button>
     <ul id="messages"></ul>
@@ -94,14 +100,17 @@
            usu.textContent = User.textContent + ": " ; 
 
           var imgUsu = document.createElement('img');
-          imgUsu.src = "iconoPersona.jpg";
+          imgUsu.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/20px-OOjs_UI_icon_userAvatar.svg.png";
 
-          usu.appendChild(imgUsu);
+          
+          
+         usu.appendChild(imgUsu);
           
           var mUsu = document.createElement('luli');
           
           mUsu.textContent = msg;
           usu.appendChild(mUsu);
+           
           
            messages.appendChild(usu);
            window.scrollTo(0, document.body.scrollHeight);
