@@ -15,10 +15,11 @@
       #messages > li:nth-child(odd) { background: #efefef; }
       #messages > lu { padding: 0.5rem 1rem;  font-weight: bold; display: block; }
       #messages > lu:nth-child(odd) { background: #efefef;  font-weight: bold;   }
-       #messages > lu > luli { background:inherit ; display:inline; font-weight: normal }
+       #messages > lu > li >luli { background:inherit ; display:inline; font-weight: normal }
+      #messages >lu >li {display: inline;}
 
       #messages > lu > img { width: 16;
-                      height: auto}
+                      height: auto; }
       #messages > usuario { padding: 0.5rem 1rem; font-weight: bold;  }
       #messages > usuario:nth-child(odd) { background: #efefef; font-weight: bold; }
     </style>
@@ -97,19 +98,28 @@
         
         if(User.textContent != ""){
           var usu = document.createElement('lu');
-           usu.textContent = User.textContent + ": " ; 
 
-          var imgUsu = document.createElement('img');
+           var imgUsu = document.createElement('img');
           imgUsu.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/20px-OOjs_UI_icon_userAvatar.svg.png";
+         
 
           
           
-         usu.appendChild(imgUsu);
+          // usu.textContent = User.textContent + ": " ; 
+         var sender = document.createElement('li');
+          sender.textContent = User.textContent + ": " ; 
+          
+          
+          
+          usu.appendChild(imgUsu);
+          usu.appendChild(sender);
+
+         
           
           var mUsu = document.createElement('luli');
           
           mUsu.textContent = msg;
-          usu.appendChild(mUsu);
+          sender.appendChild(mUsu);
            
           
            messages.appendChild(usu);
